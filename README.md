@@ -12,7 +12,7 @@ A simple cryptocurrency tracker built with **Python** and **Flask** that retriev
 
 ## Project Structure
 
-```plaintext```
+```plaintext``
 crypto_tracker/
 │
 ├── app/
@@ -40,20 +40,20 @@ crypto_tracker/
 
 1. **Clone the repository**:
 
-   ```bash```
-   git clone https://github.com/yourusername/crypto_tracker.git
+   ```bash
+   git clone https://github.com/Isma3l-19/crypto_tracker.git
    cd crypto_tracker
 
 ## Installation
 
 2. **Install dependencies**:
 
-   ```bash```
+   ```bash
    pip install -r requirements.txt
 
 ### Set up the `.env` file
 
 Create a `.env` file in the project root and add your CoinMarketCap API key:
 
-```plaintext```
+```plaintext
 API_KEY="your_coinmarketcap_api_key_here"
