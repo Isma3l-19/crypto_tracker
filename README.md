@@ -12,7 +12,7 @@ A simple cryptocurrency tracker built with **Python** and **Flask** that retriev
 
 ## Project Structure
 
-```bash
+```plaintext
 crypto_tracker/
 │
 ├── app/
