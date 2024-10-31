@@ -7,12 +7,24 @@
 </head>
 <body>
     <h1>Cryptocurrency Tracker</h1>
+
+    <!-- Form to enter cryptocurrency symbols -->
+     <form action="/", method="POST">
+        <label for="symbols">Enter symbols (comma-separated, e.g., BTC,ETH):</label>
+        <input type="text" id="symbols" name="symbols" required>
+        <button type="submit">Track</button>
+     </form>
+
+     <!-- Display the cryptocurrency data -->
     <div>
         {% if data.error %}
             <p>{{ data.error }}</p>
         {% else %}
-            <h2>Bitcoin: ${{ data['bitcoin']['usd'] }}</h2>
-            <h2>Ethereum: ${{ data['ethereum']['usd'] }}</h2>
+            {% for symbol, info in data.items() %}
+                <h2>{{ symbol | upper }}: ${{ info['usd'] }}</h2>
+                <p>Change (24): {{ info['percent_change_24h'] }}%</p>
+                <p>Volume (24): ${{ info['volume_24h'] }}</p>
+            {% endfor %}
         {% endif %}
     </div>
 </body>

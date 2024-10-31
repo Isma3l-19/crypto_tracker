@@ -1,10 +1,20 @@
 import requests
 from flask import current_app
+from flask_caching import Cache
 
-def get_crypto_data():
+# Initialize cache for this module
+cache = Cache(config={'CACHE_TYPE': 'simple'})
+
+def init_cache(app):
+    """Initialize cache with the Flask app context."""
+    cache.init_app(app)
+
+# Cache data for 5 minutes
+@cache.memoize(timeout=300)
+def get_crypto_data(symbols):
     url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest"
     params = {
-        "symbol": "BTC,ETH", # Symbols of the crypto currencies you want to track
+        "symbol": symbols,
         "convert": "USD"
     }
     headers = {
@@ -16,14 +26,13 @@ def get_crypto_data():
         response.raise_for_status() # Raises exceptions for HTTP errors
         data = response.json()
 
-        # Extract relevant data for display
+        # Extract relevant data for each symbol in the list
         crypto_data = {
-            "bitcoin": {
-                "usd": data["data"]["BTC"]["quote"]["USD"]["price"]
-            },
-            "ethereum": {
-                "usd": data["data"]["ETH"]["quote"]["USD"]["price"]
-            }
+            symbol.lower(): {
+                "usd": data["data"][symbol]["quote"]["USD"]["price"],
+                "percent_change_24h": data["data"][symbol]["quote"]["USD"]["percent_change_24h"],
+                "volume_24h": data["data"][symbol]["quote"]["USD"]["volume_24h"]
+            } for symbol in symbols.split(",")
         }
         return crypto_data
     
