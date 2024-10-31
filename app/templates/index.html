@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptocurrency Tracker</title>
+</head>
+<body>
+    <h1>Cryptocurrency Tracker</h1>
+    <div>
+        {% if data.error %}
+            <p>{{ data.error }}</p>
+        {% else %}
+            <h2>Bitcoin: ${{ data['bitcoin']['usd'] }}</h2>
+            <h2>Ethereum: ${{ data['ethereum']['usd'] }}</h2>
+        {% endif %}
+    </div>
+</body>
+</html>
