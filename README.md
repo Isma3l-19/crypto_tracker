@@ -12,7 +12,7 @@ A simple cryptocurrency tracker built with **Python** and **Flask** that retriev
 
 ## Project Structure
 
-```plaintext``
+```bash
 crypto_tracker/
 │
 ├── app/
@@ -27,6 +27,8 @@ crypto_tracker/
 ├── .env                      # Environment file for API keys
 ├── requirements.txt          # Project dependencies
 └── run.py                    # Entry point to run the Flask app
+
+```
 
 ## Getting Started
 
