@@ -18,13 +18,17 @@
      <!-- Display the cryptocurrency data -->
     <div>
         {% if data.error %}
-            <p>{{ data.error }}</p>
+            <p style="color: red;">Error: {{ data.error }}</p>
         {% else %}
             {% for symbol, info in data.items() %}
                 <h2>{{ symbol | upper }}: ${{ info['usd'] }}</h2>
                 <p>Change (24): {{ info['percent_change_24h'] }}%</p>
                 <p>Volume (24): ${{ info['volume_24h'] }}</p>
-            {% endfor %}
+                <p>Market Cap: ${{ info['market_cap'] }}</p>
+                <p>Ciculating Supply: {{ info['circulating_supply'] }}</p>
+                <p>24h High: ${{ info['high_24h'] }}</p>
+                <p>24h Low: ${{ info['low_24h'] }}</p>
+                {% endfor %}
         {% endif %}
     </div>
 </body>

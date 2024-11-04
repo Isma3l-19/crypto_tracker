@@ -26,12 +26,20 @@ def get_crypto_data(symbols):
         response.raise_for_status() # Raises exceptions for HTTP errors
         data = response.json()
 
+        # Check for specific CoinMarketCap errors
+        if 'status' in data and data['status']['error_code'] != 0:
+            return {"error": data['status']['error_message']}
+
         # Extract relevant data for each symbol in the list
         crypto_data = {
             symbol.lower(): {
                 "usd": data["data"][symbol]["quote"]["USD"]["price"],
                 "percent_change_24h": data["data"][symbol]["quote"]["USD"]["percent_change_24h"],
-                "volume_24h": data["data"][symbol]["quote"]["USD"]["volume_24h"]
+                "volume_24h": data["data"][symbol]["quote"]["USD"]["volume_24h"],
+                "market_cap": data["data"][symbol]["quote"]["USD"]["market_cap"],
+                "circulating_supply": data["data"][symbol]["circulating_supply"],
+                "high_24h": data["data"][symbol]["qoute"]["USD"]["high"],
+                "low_24h": data["data"][symbol]["qoute"]["USD"]["low"]
             } for symbol in symbols.split(",")
         }
         return crypto_data
